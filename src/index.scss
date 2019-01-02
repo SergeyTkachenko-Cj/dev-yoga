@@ -1,0 +1,328 @@
+
+%html-body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+	"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+%flexbox {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+%rad_shad_marg {
+	margin: 1.5%;
+	border-radius: 0.2rem;
+	box-shadow: 1px 1px 3px grey;
+}
+
+%header_text {
+	display: inline-block;
+	margin-right: .5rem;
+	width: 3.5rem;
+	height: 2.5rem;
+	background-size: 100% 150%;
+	background-position: 0;
+}
+
+%whole_screen {
+	position: absolute;
+	top: 0; left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+@mixin clr_scheme($clr) {
+	@if ($clr == 'stretch') {
+		color: #fff;
+		background: #26374a;
+	} @else {
+		color: #26374a;
+		background: #ffd900;
+	}
+}
+
+@mixin colon($top) {
+	position: relative;
+	top: $top;
+}
+
+@mixin buttons($left, $top, $wid, $hig) {
+	position: absolute;
+	left: $left; 
+	top: $top;
+	width: $wid;
+	height: $hig;
+	font-size: 1.5rem;
+	border-radius: 50%;
+	box-shadow: 0px 0px 2px #000;
+
+	&,
+	&:hover, 
+	&:active {
+		outline: none;
+		border: none;
+		cursor: pointer;
+	}
+}
+
+@mixin on_off_signs($cntnt, $lft) {
+	content: $cntnt;
+	position: absolute;
+	top: -5%; left: $lft;
+	font-size: .4rem;
+	color: #000;
+}
+
+html {
+	@extend %html-body;
+	@extend %flexbox;
+
+		/*  PATTERN  */
+	$color2: #80c9dd;
+	$color3: #d5eaf0;
+	$color1: #62bbd3;
+	$color2-1: #fff;
+
+	background-color:#62bbd3;
+	background-image:
+	radial-gradient($color2-1 9px, transparent 10px),        
+	repeating-radial-gradient($color2-1 0, 
+							$color2-1 4px, 
+							transparent 5px, 
+							transparent 20px, 
+							$color2-1 21px, 
+							$color2-1 25px, 
+							transparent 26px, 
+							transparent 50px);    
+	background-size: 30px 30px, 90px 90px; 
+	background-position: 0 0;
+		/*  END  */
+
+	animation: 2s bg_slide infinite linear;
+	animation-play-state: paused;
+
+		body {
+			@extend %html-body;
+			@extend %flexbox;
+
+				// .anim {
+				// 	animation: clr_chng 2s infinite;
+				// }
+
+				@keyframes clr_chng {
+					0% {
+						background-color: red;
+					}
+					50% {
+						background-color: tomato;
+					}
+					100% {
+						background-color: crimson;
+					}
+				}
+
+				@keyframes bg_slide {
+					from {
+						background-position-x: 0;
+					}
+					to {
+						background-position-x: - 91px;
+					}
+				}
+
+					.pomodoro_block {
+						width: 30rem;
+						height: 43rem;	
+						
+							.cover_div {
+								@extend %whole_screen;
+								background-color: #fff;
+								opacity: .9;
+							}
+
+							.small_scrn {
+								@extend %whole_screen;
+								@extend %flexbox;
+								z-index: 999;
+								background-color: slateblue;
+								display: none;
+							}
+
+							.clr_code {
+								@include clr_scheme('s');
+							}
+
+							.clr_stretch {
+								@include clr_scheme('stretch');
+							}
+
+							.header {
+								position: relative;
+								@extend %flexbox;
+								@extend %rad_shad_marg;
+								justify-content: flex-start;
+								height: 20%;
+								padding-left: 1rem;
+								font-size: 2rem;
+
+									.code {
+										@extend %header_text;
+										background-image: url(Lp_10-512.png);
+									}
+
+									.stretch {
+										@extend %header_text;
+										background-image: url(emoji_yoga.png);
+										background-size: 100% 132%;
+									}
+
+									.timer_sml {
+										margin-left: 38%;
+
+											i {
+												@include colon(-.2rem);
+											}
+									}
+
+									.timer_marg_sm {
+										margin-left: 31%;
+									}
+
+									.timer_marg_lg {
+										margin-left: 36%;
+									}
+							}
+
+							.bg_code {
+								background: url(644564-programming.png) no-repeat center;
+								background-size: 78%;
+							}
+
+							.bg_stretch {
+								background: url(2043771-yoga.png) no-repeat center;
+								background-size: 80%;
+							}
+
+							.app_cover {
+								@extend %flexbox;
+								@extend %rad_shad_marg;
+								position: relative;
+								height: 72%;
+								background-color: #fff;
+
+									.pause:before {
+										content: "||"
+									}
+
+									.play:before {
+										content: ">"
+									}
+
+									.pause, .play {
+										@include buttons(calc(100% - 3rem), 90%, 6rem, 6rem);
+									}
+
+									.sound_btn {
+										@include buttons(105%, 75%, 3rem, 3rem);
+									}
+
+									.sound_btn:hover > .tool_tip_block {
+										display: inline-block;
+									}
+
+									.tool_tip_block {
+										@extend %rad_shad_marg;
+										display: none;
+										position: absolute;
+										top: -90%; left: 50%;
+										padding: 5px;
+										font-size: 1rem;
+										color: #000;
+										background-color: #fff; 
+										transition: 2s;
+									}
+
+									.sound_btn:before {
+										@include on_off_signs('off', -5%);
+									}
+
+									.sound_btn:after {
+										@include on_off_signs('on', 90%);
+									}
+							}
+				}
+		}
+}
+
+@media (max-height: 695px) and (max-width: 478px) {
+	html body .pomodoro_block {
+		width: 100vw;
+		height: 100vh;
+	}
+}
+
+@media (max-height: 550px),
+(max-width: 280px) {
+	* {
+		display: none;
+	}
+
+	html {
+		background-image: none;
+		background-color:#fff;
+		text-align: center;
+	}
+
+	html::before {
+		content: "SCREEN IS TOO SMALL :'(";
+		position: absolute;
+		font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;;
+		font-size: 2.5rem;
+	}
+}
+
+@media (max-width: 615px) {
+	html body .pomodoro_block .app_cover .pause, 
+	html body .pomodoro_block .app_cover .play {
+		@include buttons(calc(10% - 3rem), 90%, 6rem, 6rem);
+	}
+
+	html body .pomodoro_block .app_cover .sound_btn {
+		@include buttons(25%, 87%, 3rem, 3rem);
+	}
+}
+
+@media (max-width: 478px) {
+	html body .pomodoro_block {
+		width: 100vw;
+	}
+
+	html body .pomodoro_block .bg_code {
+		background-size: 23rem;
+	}
+
+	html body .pomodoro_block .app_cover,
+	html body .pomodoro_block .header {
+		margin: 0;
+	}
+
+	html body .pomodoro_block .header .timer_marg_sm,
+	html body .pomodoro_block .header .timer_marg_lg {
+		position: absolute;
+		right: 5%; 
+		margin-left: 0;
+	}
+}
+
+@media (max-width: 375px) {
+	html body .pomodoro_block .bg_code {
+		background-size: 100%;
+	}
+}
