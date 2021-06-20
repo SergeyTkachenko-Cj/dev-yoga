@@ -122,7 +122,8 @@ class App extends React.Component {
 			this.clickBgAnim();
 			this.sound.wav.play();
 			// NotificationManager.success('You have added a new book!', 'Successful!', 2000);
-				const title = 'React-Web-Notification';
+				// const title = 'React-Web-Notification';
+
 				const body = 'Hello';
 				const icon = 'http://mobilusoss.github.io/react-web-notification/example/Notifications_button_24.png';
 
@@ -178,9 +179,9 @@ class App extends React.Component {
 	  }
 	
 	  handleNotificationOnShow(e, tag) {
-		var img = '/to-do-notifications/img/icon-128.png';
-		var text = 'HEY! Your task "' + 'bambi' + '" is now overdue.';
-		new Notification();
+		// var img = '/to-do-notifications/img/icon-128.png';
+		// var text = 'HEY! Your task "' + 'bambi' + '" is now overdue.';
+		// new Notification();
 		console.log(e, 'Notification showed tag:' + tag);
 	  }
 	
